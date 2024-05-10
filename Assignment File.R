@@ -39,6 +39,18 @@ ggplot(lecture_data, aes(x = Visual_Aids, y = Quality_Score, fill = Visual_Aids)
   scale_fill_manual(values = c("No" = "lightblue", "Yes" = "lightgreen")) +
   theme_minimal()
 
+# Split the data by Visual_Aids
+scores_no_aids <- lecture_data$Quality_Score[lecture_data$Visual_Aids == "No"]
+scores_with_aids <- lecture_data$Quality_Score[lecture_data$Visual_Aids == "Yes"]
+
+# Plotting QQ plot for lectures without visual aids
+qqnorm(scores_no_aids, main = "QQ Plot - No Visual Aids")
+qqline(scores_no_aids, col = "red")
+
+# Plotting QQ plot for lectures with visual aids
+qqnorm(scores_with_aids, main = "QQ Plot - With Visual Aids")
+qqline(scores_with_aids, col = "red")
+
 # Observation 1: Difference in Median
 median_quality_no_aids <- median(lecture_data$Quality_Score[lecture_data$Visual_Aids == "No"])
 median_quality_with_aids <- median(lecture_data$Quality_Score[lecture_data$Visual_Aids == "Yes"])
